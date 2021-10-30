@@ -1,0 +1,9 @@
+103r\sys.o: ..\Src\sys.c
+103r\sys.o: ../Inc/sys.h
+103r\sys.o: D:\program\KEIL\software\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include\stm32f10x.h
+103r\sys.o: ../Drivers/CMSIS/Include/core_cm3.h
+103r\sys.o: D:\program\KEIL\software\ARM\ARMCC\Bin\..\include\stdint.h
+103r\sys.o: ../Drivers/CMSIS/Include/cmsis_version.h
+103r\sys.o: ../Drivers/CMSIS/Include/cmsis_compiler.h
+103r\sys.o: ../Drivers/CMSIS/Include/cmsis_armcc.h
+103r\sys.o: D:\program\KEIL\software\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include\system_stm32f10x.h
