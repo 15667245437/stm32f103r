@@ -6,6 +6,7 @@
 "103r\main.o"
 "103r\gpio.o"
 "103r\adc.o"
+"103r\tim.o"
 "103r\usart.o"
 "103r\stm32f1xx_it.o"
 "103r\stm32f1xx_hal_msp.o"
