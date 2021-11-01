@@ -34,13 +34,13 @@ extern "C" {
 extern UART_HandleTypeDef huart1;
 
 /* USER CODE BEGIN Private defines */
-
+#define max_buf 100
 /* USER CODE END Private defines */
 
 void MX_USART1_UART_Init(void);
 
 /* USER CODE BEGIN Prototypes */
-
+void uart1printf(char *fmt, ...);
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus

@@ -10,6 +10,7 @@
 "103r\usart.o"
 "103r\stm32f1xx_it.o"
 "103r\stm32f1xx_hal_msp.o"
+"103r\esp8266.o"
 "103r\stm32f1xx_hal_gpio_ex.o"
 "103r\stm32f1xx_hal_adc.o"
 "103r\stm32f1xx_hal_adc_ex.o"

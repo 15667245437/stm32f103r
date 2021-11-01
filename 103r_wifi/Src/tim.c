@@ -75,7 +75,7 @@ void HAL_TIM_Base_MspInit(TIM_HandleTypeDef* tim_baseHandle)
     HAL_NVIC_SetPriority(TIM6_IRQn, 0, 0);
     HAL_NVIC_EnableIRQ(TIM6_IRQn);
   /* USER CODE BEGIN TIM6_MspInit 1 */
-
+	
   /* USER CODE END TIM6_MspInit 1 */
   }
 }
@@ -100,13 +100,14 @@ void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef* tim_baseHandle)
 }
 
 /* USER CODE BEGIN 1 */
-int a=0;
+extern u16 usart1_rx_sta;
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
 	if(htim->Instance==TIM6)
 	{
-		a++;
 		__HAL_TIM_CLEAR_FLAG(&htim6,TIM_EventSource_Update );
+		usart1_rx_sta|=0x8000;
+		TIM6->CR1&=0x00;
 	}
 		
 }

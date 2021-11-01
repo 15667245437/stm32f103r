@@ -29,6 +29,7 @@
 #include "delay.h"
 #include "oled.h"
 #include "iic.h"
+#include "esp8266.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -98,8 +99,8 @@ int main(void)
 	oled_init();
 	oled_on();
 	delay_ms(100);
-	oled_showstr(15,10,"123",16);  
-	oled_refreshram();
+	atk_8266_quit_trans();
+	esp8266_init();
   /* USER CODE END 2 */
 
   /* Infinite loop */

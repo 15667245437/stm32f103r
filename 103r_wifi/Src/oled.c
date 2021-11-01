@@ -183,3 +183,10 @@ void oled_clear()
 	for(i=0;i<8;i++)for(n=0;n<128;n++) OLED_GRAM[n][i]=0X00;  
 	oled_refreshram();
 }
+
+void oled_printf(unsigned char* strings, u8 rows)
+{
+	oled_clear();
+	oled_showstr(1,(rows-1)*12-1,strings,12);
+	oled_refreshram();
+}

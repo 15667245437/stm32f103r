@@ -23,6 +23,7 @@
 #include "stm32f1xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "usart.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -192,7 +193,8 @@ void SysTick_Handler(void)
 
   /* USER CODE END SysTick_IRQn 1 */
 }
-
+extern u16 usart1_rx_sta;
+extern u8 usart1_rx_buf[max_buf];
 /******************************************************************************/
 /* STM32F1xx Peripheral Interrupt Handlers                                    */
 /* Add here the Interrupt Handlers for the used peripherals.                  */
@@ -203,15 +205,30 @@ void SysTick_Handler(void)
 /**
   * @brief This function handles USART1 global interrupt.
   */
+
+
 void USART1_IRQHandler(void)
 {
-  /* USER CODE BEGIN USART1_IRQn 0 */
-
-  /* USER CODE END USART1_IRQn 0 */
-  HAL_UART_IRQHandler(&huart1);
-  /* USER CODE BEGIN USART1_IRQn 1 */
-
-  /* USER CODE END USART1_IRQn 1 */
+	char temp;
+	
+	if((__HAL_UART_GET_FLAG(&huart1,UART_FLAG_RXNE)!=RESET))
+	{
+		temp=USART1->DR;
+		if((usart1_rx_sta&(1<<15))==0x8000)
+		{
+			usart1_rx_sta=0;
+		}
+		if((usart1_rx_sta&(1<<15))==0)
+		{
+			if(usart1_rx_sta<max_buf)
+			{
+				TIM6->CNT=0;
+				if(usart1_rx_sta==0) TIM6->CR1|=1<<0; 
+				usart1_rx_buf[usart1_rx_sta++]=temp;
+			}
+			else usart1_rx_sta|=1<<15;
+		}
+	}
 }
 
 /**

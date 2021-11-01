@@ -21,7 +21,9 @@
 #include "usart.h"
 
 /* USER CODE BEGIN 0 */
-
+#include "string.h"
+#include "stdarg.h"
+#include "stdio.h"
 /* USER CODE END 0 */
 
 UART_HandleTypeDef huart1;
@@ -87,7 +89,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef* uartHandle)
     HAL_NVIC_SetPriority(USART1_IRQn, 0, 0);
     HAL_NVIC_EnableIRQ(USART1_IRQn);
   /* USER CODE BEGIN USART1_MspInit 1 */
-
+	__HAL_UART_ENABLE_IT(uartHandle,UART_IT_RXNE);
   /* USER CODE END USART1_MspInit 1 */
   }
 }
@@ -118,6 +120,24 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* uartHandle)
 }
 
 /* USER CODE BEGIN 1 */
+__align(8) u8 usart1_tx_buf[max_buf]={"AT"};
+u8 usart1_rx_buf[max_buf];
+
+void uart1printf(char *fmt, ...)
+{
+	uint16_t i=0,j=0;
+	va_list ap;
+	va_start(ap,fmt);
+	vsprintf ((char*) usart1_tx_buf, fmt,ap);
+	va_end(ap);
+	i=strlen((const char*) usart1_tx_buf);
+	for(j=0;j<i;j++)
+	{
+		while((USART1->SR&0X40)==0);
+		USART1->DR=usart1_tx_buf[j];
+	}
+}
+
 
 /* USER CODE END 1 */
 

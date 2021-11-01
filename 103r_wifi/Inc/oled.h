@@ -14,6 +14,6 @@ void oled_chinese(u8 x,u8 y,u8 num);
 void oled_refreshram(void);
 void oled_fill(u8 x1,u8 y1,u8 x2,u8 y2);
 void oled_clear(void);
-
+void oled_printf(unsigned char* strings, u8 rows);
 
 #endif
